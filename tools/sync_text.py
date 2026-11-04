@@ -37,7 +37,10 @@ def apply(source, edits):
     for a,b,value in sorted(edits,reverse=True): source=source[:a]+value+source[b:]
     return source
 
-def text(value): return '' if value is None else str(value)
+def text(value):
+    if value is None:return ''
+    if isinstance(value,float) and value.is_integer():return str(int(value))
+    return str(value)
 def quote(value): return json.dumps(value,ensure_ascii=False).replace('</','<\\/')
 def identifier(value):
     v=text(value); return v.zfill(2) if v.isdigit() else v
@@ -61,7 +64,7 @@ def import_core(source,wb):
         if row[0] is not None:
             key=identifier(row[0]); assert key in combat
             combat[key]={k:text(v) for k,v in zip(['circle','divine','martial','rank','implant','secretImplant','specialty'],row[2:9])}
-    rows=list(wb['대륙과 국가'].iter_rows(min_row=5,values_only=True))
+    rows=[r for r in wb['대륙과 국가'].iter_rows(min_row=5,values_only=True) if any(v is not None for v in r)]
     assert len(rows)==6
     for i,c in enumerate(data['continents']):
         pair=rows[i*2:i*2+2]; assert tuple(pair[0][:3])==tuple(pair[1][:3]),'대륙 공통 설정의 두 행이 다릅니다'
@@ -88,7 +91,7 @@ def import_core(source,wb):
     for key,tag in [('closingTitle','h2'),('closingSubtitle','p')]:
         inner(next(n for n in doc.nodes if n['parent'] is closing and n['tag']==tag and (tag!='p' or not n['attrs'].get('class'))),val(key))
     tables=[n for n in doc.nodes if n['tag']=='tbody']; assert len(tables)==2
-    schedule=list(wb['학사일정'].iter_rows(min_row=5,values_only=True))
+    schedule=list(wb['학사일정'].iter_rows(min_row=5,max_col=5,values_only=True))
     for i,table in enumerate(tables):
         trs=[]
         for term,date,event,note,style in schedule:
