@@ -54,16 +54,32 @@ def data_from(source):
 
 def import_core(source,wb):
     bundle=data_from(source); data=bundle['data']; combat=bundle['combat']
-    for sheet,group,fields in [('등장인물 25명','cast',['shortName','name','group','faction','nation','role','personality','tagline','description']),('보스 4명','bosses',['title','name','faction','nation','role','personality','tagline','description'])]:
+    cast_sheet=next(n for n in wb.sheetnames if n.startswith('등장인물 '))
+    combat_sheet=next(n for n in wb.sheetnames if n.startswith('전투 능력 '))
+    cast_rows=[r for r in wb[cast_sheet].iter_rows(min_row=5,max_col=10,values_only=True) if r[0] is not None]
+    desired=[identifier(r[0]) for r in cast_rows]
+    if [p['id'] for p in data['cast']]!=desired:
+        assert '인물 ID 대응' in wb,'Renumbering requires the image ID mapping sheet'
+        mapping={identifier(r[0]):identifier(r[1]) if r[1] is not None else None for r in wb['인물 ID 대응'].iter_rows(min_row=2,max_col=4,values_only=True) if r[0] is not None}
+        old={p['id']:p for p in data['cast']}; rebuilt=[]
+        for ident in desired:
+            prior=mapping[ident]
+            assert prior is None or prior in old,'Unknown previous image ID'
+            item=dict(old[prior]) if prior else {'indexImage':'','image':'','chatUrl':''}
+            item['id']=ident;rebuilt.append(item)
+        data['cast']=rebuilt
+    for sheet,group,fields in [(cast_sheet,'cast',['shortName','name','group','faction','nation','role','personality','tagline','description']),('보스 4명','bosses',['title','name','faction','nation','role','personality','tagline','description'])]:
         rows=list(wb[sheet].iter_rows(min_row=5,values_only=True)); byid={identifier(r[0]):r for r in rows if r[0] is not None}
         assert set(byid)=={x['id'] for x in data[group]},sheet+' ID mismatch'
         for item in data[group]:
             for field,value in zip(fields,byid[item['id']][1:]): item[field]=text(value)
             item.pop('combat',None)
-    for row in wb['전투 능력 29명'].iter_rows(min_row=5,values_only=True):
+    combat={}
+    for row in wb[combat_sheet].iter_rows(min_row=5,max_col=9,values_only=True):
         if row[0] is not None:
-            key=identifier(row[0]); assert key in combat
+            key=identifier(row[0]); assert key in {p['id'] for p in data['cast']+data['bosses']}
             combat[key]={k:text(v) for k,v in zip(['circle','divine','martial','rank','implant','secretImplant','specialty'],row[2:9])}
+    assert set(combat)=={p['id'] for p in data['cast']+data['bosses']},'Combat IDs do not match roster'
     rows=[r for r in wb['대륙과 국가'].iter_rows(min_row=5,values_only=True) if any(v is not None for v in r)]
     assert len(rows)==6
     for i,c in enumerate(data['continents']):
