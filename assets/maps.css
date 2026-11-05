@@ -10,8 +10,8 @@
 
 /* Final typography balance: campus sans-serif, world at 1/1.2 of prior size. */
 .atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-weight:700;letter-spacing:-.025em}
-.atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:48.3333px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:41.6667px}
-@media(max-width:720px){.atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:56.6667px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:48.3333px}}
+.atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:38.6667px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:33.3333px}
+@media(max-width:720px){.atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:45.3333px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:38.6667px}}
 
 /* Illustrated campus: keep full source aspect ratio; shapes are invisible hit targets. */
 .atlas-campus-hit{fill:#d9e7f1;fill-opacity:0;stroke:none;transition:fill-opacity .18s}.atlas-region:hover>.atlas-campus-hit,.atlas-region:focus-visible>.atlas-campus-hit{fill-opacity:.15}.atlas-region[aria-pressed=true]>.atlas-campus-hit{fill-opacity:.10}
@@ -22,5 +22,10 @@
 .atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:48px;--campus-label-scale:1}
 .atlas-svg[data-atlas-mode=campus] .atlas-nameplate[data-compact=true]{--campus-label-scale:.7}
 .atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:calc(var(--campus-label-base)*var(--campus-label-scale));stroke-width:calc(6px*var(--campus-label-scale))}
-.atlas-svg[data-atlas-mode=campus] .atlas-zone-english{font-size:calc(var(--campus-label-base)*var(--campus-label-scale)*.3);stroke-width:calc(1.8px*var(--campus-label-scale));letter-spacing:.015em;font-weight:700}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-english{font-size:calc(var(--campus-label-base)*var(--campus-label-scale)*.45);stroke-width:calc(2.7px*var(--campus-label-scale));letter-spacing:.015em;font-weight:700}
 @media(max-width:720px){.atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:60px}}
+
+/* Two minor world regions receive a further 10% reduction. */
+.atlas-svg[data-atlas-mode=world] .atlas-country-name,.atlas-svg[data-atlas-mode=world] .atlas-zone-name{stroke-width:5.6px}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]) .atlas-zone-name{font-size:30px;stroke-width:5.04px}
+@media(max-width:720px){.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]) .atlas-zone-name{font-size:34.8px}}
