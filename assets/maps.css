@@ -12,3 +12,8 @@
 .atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-weight:700;letter-spacing:-.025em}
 .atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:48.3333px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:41.6667px}
 @media(max-width:720px){.atlas-svg[data-atlas-mode=world] .atlas-country-name{font-size:56.6667px}.atlas-svg[data-atlas-mode=world] .atlas-zone-name{font-size:48.3333px}}
+
+/* Illustrated campus: keep full source aspect ratio; shapes are invisible hit targets. */
+.atlas-campus-hit{fill:#d9e7f1;fill-opacity:0;stroke:none;transition:fill-opacity .18s}.atlas-region:hover>.atlas-campus-hit,.atlas-region:focus-visible>.atlas-campus-hit{fill-opacity:.15}.atlas-region[aria-pressed=true]>.atlas-campus-hit{fill-opacity:.10}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:48px;stroke-width:6px}
+@media(max-width:720px){.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:60px}}
