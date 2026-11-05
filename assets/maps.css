@@ -17,3 +17,10 @@
 .atlas-campus-hit{fill:#d9e7f1;fill-opacity:0;stroke:none;transition:fill-opacity .18s}.atlas-region:hover>.atlas-campus-hit,.atlas-region:focus-visible>.atlas-campus-hit{fill-opacity:.15}.atlas-region[aria-pressed=true]>.atlas-campus-hit{fill-opacity:.10}
 .atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:48px;stroke-width:6px}
 @media(max-width:720px){.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:60px}}
+
+/* Bilingual campus names; three secondary locations use 70% of the base size. */
+.atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:48px;--campus-label-scale:1}
+.atlas-svg[data-atlas-mode=campus] .atlas-nameplate[data-compact=true]{--campus-label-scale:.7}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:calc(var(--campus-label-base)*var(--campus-label-scale));stroke-width:calc(6px*var(--campus-label-scale))}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-english{font-size:calc(var(--campus-label-base)*var(--campus-label-scale)*.3);stroke-width:calc(1.8px*var(--campus-label-scale));letter-spacing:.015em;font-weight:700}
+@media(max-width:720px){.atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:60px}}

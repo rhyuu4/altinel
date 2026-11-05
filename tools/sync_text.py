@@ -266,12 +266,13 @@ def sync_map_regions(wb,path):
         script=Path(directory)/'map-data.cjs'
         script.write_text(source[start:end]+'\nconsole.log(JSON.stringify({campus,world}));')
         data=json.loads(subprocess.check_output(['node',str(script)]))
-    entries={str(r[0]):r for r in wb['지도 지역'].iter_rows(min_row=2,max_col=5,values_only=True) if r[0] is not None}
+    entries={str(r[0]):r for r in wb['지도 지역'].iter_rows(min_row=2,max_col=6,values_only=True) if r[0] is not None}
     assert set(entries)=={mode+'.'+item['id'] for mode,items in data.items() for item in items},'Map region IDs changed'
     for mode,items in data.items():
         for item in items:
             row=entries[mode+'.'+item['id']]
             item.update(name=text(row[2]),category=text(row[3]),desc=text(row[4]))
+            if mode=='campus' and len(row)>5 and row[5] is not None:item['englishName']=text(row[5])
     payload='const campus='+quote(data['campus'])+';\nconst world='+quote(data['world'])+';\n'
     path.write_text(source[:start]+payload+source[end:])
 
