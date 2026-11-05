@@ -274,7 +274,15 @@ def sync_map_regions(wb,path):
             item.update(name=text(row[2]),category=text(row[3]),desc=text(row[4]))
             if mode=='campus' and len(row)>5 and row[5] is not None:item['englishName']=text(row[5])
     payload='const campus='+quote(data['campus'])+';\nconst world='+quote(data['world'])+';\n'
-    path.write_text(source[:start]+payload+source[end:])
+    result=source[:start]+payload+source[end:]
+    if '지도 공통 문구' in wb:
+        match=re.search(r'const ATLAS_COPY=(.*?);\n',result)
+        assert match,'Map copy bindings missing'
+        values=json.loads(match[1])
+        rows={text(r[0]):text(r[2]) for r in wb['지도 공통 문구'].iter_rows(min_row=5,max_col=4,values_only=True) if r[0] is not None}
+        assert set(rows)==set(values),'Map copy IDs changed'
+        result=result[:match.start(1)]+quote(rows)+result[match.end(1):]
+    path.write_text(result)
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('workbook');ap.add_argument('--html',default='index.html');ap.add_argument('--export-workbook');args=ap.parse_args()
