@@ -45,3 +45,5 @@ python tools/export_text.py editor/새-텍스트-편집용.xlsx
 ```
 
 수정한 새 파일은 `python tools/sync_text.py editor/새-텍스트-편집용.xlsx`로 반영합니다.
+
+보스 이미지는 `assets/bosses/`에 초상화(4:5)와 상세 이미지(4:3)로 나누어 보관합니다. 필요한 세로 여분은 아래쪽만 잘랐고 WebP 품질 92로 저장했습니다. 보스 상세창의 `.is-boss` 상태는 일반 인물 상세창을 열 때 해제됩니다. 보스 구획과 상세창은 각각 한 번만 `saturate(.95)`를 적용합니다.
