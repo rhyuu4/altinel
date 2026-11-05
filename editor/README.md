@@ -19,3 +19,5 @@ python tools/sync_text.py editor/아카데미-알티넬-V10-텍스트-편집용-
 ```sh
 python tools/optimize_images.py --backup-dir /workspace/altinel-originals/manual-update --quality 92
 ```
+
+지도는 `assets/maps.js`의 SVG 지형으로 구성됩니다. 엑셀의 **지도 지역** 시트에서 지역 이름·분류·설명을 수정하면 같은 반영 명령으로 지도 설명도 갱신됩니다. **대륙과 국가** 시트는 기존 자료 보관용이며 현재 지도에는 카드로 표시되지 않습니다. 지형·좌표와 지도 전환 동작은 코드에서 관리합니다.

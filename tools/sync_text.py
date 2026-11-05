@@ -202,7 +202,9 @@ def extra_rows(source,covered):
         for attr in ('aria-label','alt'):
             if attr in n['attrs']:rows.append(('attr:'+n['path']+':'+attr,'접근성 / '+(n['attrs'].get('id') or n['tag']),n['attrs'][attr],'접근성 설명'))
         if n['tag']=='meta' and n['attrs'].get('name')=='description':rows.append(('attr:'+n['path']+':content','검색 결과 / 사이트 설명',n['attrs']['content'],'검색엔진 요약'))
-    rows.extend(('ui:'+k,desc,value,'동작 중 생성되는 문구') for k,(value,desc) in DYNAMIC.items())
+    ui_match=re.search(r'const ALTINEL_UI = (.*?);\n',source)
+    current_ui=json.loads(ui_match[1]) if ui_match else {}
+    rows.extend(('ui:'+k,desc,current_ui.get(k,value),'동작 중 생성되는 문구') for k,(value,desc) in DYNAMIC.items())
     rows.append(('setting:siteChatUrl','하단 / 채팅 연결 주소',data_from(source)['data'].get('siteChatUrl',''),'https:// 주소, 비워 두면 미등록'))
     return rows
 
@@ -256,6 +258,23 @@ def extend_workbook(wb,source,covered):
     usage['A16']='• 저장한 파일을 채팅에 업로드하면 현재 홈페이지에 반영합니다. 이미지·디자인은 유지합니다.'
     usage['A19']='• 기타 화면 문구의 C열도 수정할 수 있습니다. ID와 적용 위치는 수정하지 마세요. 매크로 실행은 필요 없습니다.'
 
+
+def sync_map_regions(wb,path):
+    if '지도 지역' not in wb:return
+    source=path.read_text();start=source.index('const campus=');end=source.index('function el(')
+    with tempfile.TemporaryDirectory() as directory:
+        script=Path(directory)/'map-data.cjs'
+        script.write_text(source[start:end]+'\nconsole.log(JSON.stringify({campus,world}));')
+        data=json.loads(subprocess.check_output(['node',str(script)]))
+    entries={str(r[0]):r for r in wb['지도 지역'].iter_rows(min_row=2,max_col=5,values_only=True) if r[0] is not None}
+    assert set(entries)=={mode+'.'+item['id'] for mode,items in data.items() for item in items},'Map region IDs changed'
+    for mode,items in data.items():
+        for item in items:
+            row=entries[mode+'.'+item['id']]
+            item.update(name=text(row[2]),category=text(row[3]),desc=text(row[4]))
+    payload='const campus='+quote(data['campus'])+';\nconst world='+quote(data['world'])+';\n'
+    path.write_text(source[:start]+payload+source[end:])
+
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('workbook');ap.add_argument('--html',default='index.html');ap.add_argument('--export-workbook');args=ap.parse_args()
     p=Path(args.html);before=p.read_text();wb=openpyxl.load_workbook(args.workbook,keep_vba=True)
@@ -263,6 +282,7 @@ def main():
     before_images=re.findall(r'data:image/[^\s\"\'`<>]+',before);after_images=re.findall(r'data:image/[^\s\"\'`<>]+',after)
     assert sorted(before_images)==sorted(after_images),'Image preservation failed'
     assert re.findall(r'<style>.*?</style>',before,re.S)==re.findall(r'<style>.*?</style>',after,re.S),'CSS preservation failed'
+    sync_map_regions(wb,p.parent/'assets/maps.js')
     p.write_text(after)
     if args.export_workbook:extend_workbook(wb,after,covered);wb.save(args.export_workbook)
     print('Imported workbook; preserved all embedded images and CSS.')
