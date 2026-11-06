@@ -77,8 +77,8 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .hero-landscape .microline{color:#6f501e;font-size:12px;font-weight:800;letter-spacing:.15em}
 .hero-landscape .micro-decor{background:#a16d20;height:2px}
 .hero-landscape .hero-eyebrow{color:#233b4b;font-size:15px;font-weight:800;letter-spacing:.02em}
-.hero-landscape h1{font-family:'Noto Serif KR','Malgun Gothic',Georgia,serif;color:#142536;font-weight:900;font-size:clamp(41px,4.1vw,70px);line-height:1.29;white-space:normal;letter-spacing:-.065em;margin:0 0 22px;text-shadow:0 1px 0 #fff7}
-.hero-landscape h1 em{color:#98681e;font-weight:950;text-shadow:0 1px 0 #fff9}
+.hero-landscape h1{font-family:'Noto Serif KR','Malgun Gothic',Georgia,serif;color:#142536;font-weight:400;font-size:clamp(41px,4.1vw,70px);line-height:1.29;white-space:normal;letter-spacing:-.065em;margin:0 0 22px;text-shadow:0 1px 0 #fff7}
+.hero-landscape h1 em{color:#98681e;font-weight:400;text-shadow:0 1px 0 #fff9}
 .hero-landscape .hero-sub{font-size:15px;font-weight:650;line-height:1.95;color:#283f50;text-shadow:0 1px 0 #fffa}
 .hero-landscape .hero-stats{border-top:1px solid rgba(31,46,53,.22);max-width:550px;margin-top:34px;padding-top:18px;gap:36px}
 .hero-landscape .hero-stats strong{color:#92631e;font-weight:700;font-size:29px}
@@ -505,23 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dialog.scrollTop = 0;
   }
 
-  function setupGlobalChat() {
-    const anchor = $('#site-chat-link');
-    const url = getUrl(data.siteChatUrl);
-    anchor.href = url || '#';
-    anchor.target = url ? '_blank' : '_self';
-    anchor.rel = url ? 'noopener noreferrer' : '';
-    anchor.setAttribute('aria-disabled',String(!url));
-    $('#site-chat-note').textContent = url ? ALTINEL_UI.chatReady : ALTINEL_UI.chatPending;
-    anchor.addEventListener('click', event => {
-      if (!url) { event.preventDefault(); showToast(ALTINEL_UI.chatToast); }
-    });
-  }
-
   renderFilters();
   renderRoster();
   renderBosses();
-  setupGlobalChat();
 
   document.addEventListener('click', event => {
     const roleButton = event.target.closest('[data-filter-role]');
@@ -689,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
 
     <section class="closing" id="enter">
-      <div class="wrap closing-content"><span class="closing-symbol" aria-hidden="true">✥</span><p class="section-eyebrow">THE NEXT PAGE IS YOURS</p><h2>이제, 당신의 이야기를 시작하자.</h2><p>본 사이트는 크랙 콘텐츠 &#x27;아카데미 알티넬&#x27;의 소개를 위해 제작되었습니다.</p><a class="action action-primary" href="#" id="site-chat-link">캐릭터채팅 시작하기 ↗</a><p class="closing-note" id="site-chat-note">채팅 페이지 주소 등록 예정</p></div>
+      <div class="wrap closing-content"><span class="closing-symbol" aria-hidden="true">✥</span><p class="section-eyebrow">THE NEXT PAGE IS YOURS</p><h2>이제, 당신의 이야기를 시작하자.</h2><p>본 사이트는 크랙 콘텐츠 &#x27;아카데미 알티넬&#x27;의 소개를 위해 제작되었습니다.</p><a class="action action-primary" href="#top" id="site-chat-link">맨 위로 가기 ↑</a><p class="closing-note" id="site-chat-note">페이지 맨 위로 돌아갑니다.</p></div>
     </section>
   </main>
 
