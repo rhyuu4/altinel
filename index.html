@@ -577,13 +577,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="logo-words"><strong>아카데미 알티넬</strong><small>ALTINEL · CHARACTER ARCHIVE</small></span>
       </a>
       <nav class="desktop-nav" aria-label="주요 섹션">
-        <a href="#academy">학원 생활</a><a href="#roster">등장인물</a><a href="#targets">BOSS</a><a href="#setting">지도와 세계</a>
+        <a href="#academy">학원 생활</a><a href="#setting">지도와 세계</a><a href="#roster">등장인물</a><a href="#targets">BOSS</a>
       </nav>
       <a href="#roster" class="nav-cta">인물 도감 <span aria-hidden="true">↗</span></a>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="mobile-nav" aria-expanded="false">☰</button>
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="모바일 메뉴" hidden>
-      <a href="#academy">학원 생활</a><a href="#roster">등장인물</a><a href="#targets">시대의 전설</a><a href="#setting">지도와 세계</a>
+      <a href="#academy">학원 생활</a><a href="#setting">지도와 세계</a><a href="#roster">등장인물</a><a href="#targets">시대의 전설</a>
     </nav>
   </header>
 
@@ -640,29 +640,9 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </section>
 
-    <section class="section roster-section" id="roster" aria-labelledby="roster-title">
-      <div class="wrap">
-        <div class="section-heading"><div><p class="section-eyebrow">02 / CHARACTER INDEX</p><h2 id="roster-title">인물 명부</h2><p>클릭하여 상세정보를 확인할 수 있습니다.</p></div><div class="small-counter" id="roster-count">25 PROFILES</div></div>
-        <div class="roster-toolbar stacked-toolbar">
-          <div class="filter-line"><strong class="filter-label">역할</strong><div class="filters" id="roster-filters" aria-label="역할 선택"></div></div>
-          <div class="filter-line"><strong class="filter-label">계열</strong><div class="filters" id="faction-filters" aria-label="계열 선택"></div></div>
-          <p class="toolbar-help">두 분류를 조합할 수 있습니다. 예: 교직원 + 철혈계</p>
-        </div>
-        <div id="roster-grid" class="roster-grid"></div>
-      </div>
-    </section>
-
-    <section class="section targets-section" id="targets" aria-labelledby="targets-title">
-      <div class="wrap">
-        <div class="section-heading split"><div><p class="section-eyebrow danger-text">03 / RESTRICTED FILES</p><h2 id="targets-title">이 시대의 &#x27;전설&#x27;</h2><p>그 결말이 어떻게 되든, 이야기의 중대한 부분이 될 터다</p></div><button type="button" class="relock" id="hide-all-bosses">모두 다시 가리기 <span aria-hidden="true">↶</span></button></div>
-        <div class="spoiler-notice"><span aria-hidden="true">◈</span><span>⚠️중요 스포일러가 포함되어 있으므로 플레이 후 열람을 권장합니다.</span></div>
-        <div class="boss-grid" id="boss-grid"></div>
-      </div>
-    </section>
-
     <section class="section setting-section atlas-section" id="setting" aria-labelledby="setting-title">
       <div class="wrap" id="altinel-atlas">
-        <div class="section-heading"><div><p class="section-eyebrow">04 / THE ATLAS</p><h2 id="setting-title">하나의 학교, 드넓은 세계</h2><p class="atlas-intro">산호섬의 성곽에서 세 대륙 너머까지. ⚠️각 지역을 누르면 상세정보가 표시됩니다!</p></div></div>
+        <div class="section-heading"><div><p class="section-eyebrow">02 / THE ATLAS</p><h2 id="setting-title">하나의 학교, 드넓은 세계</h2><p class="atlas-intro">산호섬의 성곽에서 세 대륙 너머까지. ⚠️각 지역을 누르면 상세정보가 표시됩니다!</p></div></div>
         <div class="atlas-tabs" role="tablist" aria-label="지도 선택">
           <button class="atlas-tab" id="atlas-campus-tab" role="tab" type="button" data-map="campus" aria-controls="atlas-panel" aria-selected="true">교내 지도</button>
           <button class="atlas-tab" id="atlas-world-tab" role="tab" type="button" data-map="world" aria-controls="atlas-panel" aria-selected="false" tabindex="-1">세계지도</button>
@@ -675,6 +655,26 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="atlas-locations" aria-label="지역 목록"></div>
         </div>
         <div class="atlas-footnote"><div class="atlas-key"><span>선택 가능한 구획</span><span>교내 시설 · 탐사 구역</span></div><span class="atlas-map-note">성곽 안팎과 방위를 기준으로 단순화한 교내 개략도</span></div>
+      </div>
+    </section>
+
+    <section class="section roster-section" id="roster" aria-labelledby="roster-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="section-eyebrow">03 / CHARACTER INDEX</p><h2 id="roster-title">인물 명부</h2><p>클릭하여 상세정보를 확인할 수 있습니다.</p></div><div class="small-counter" id="roster-count">25 PROFILES</div></div>
+        <div class="roster-toolbar stacked-toolbar">
+          <div class="filter-line"><strong class="filter-label">역할</strong><div class="filters" id="roster-filters" aria-label="역할 선택"></div></div>
+          <div class="filter-line"><strong class="filter-label">계열</strong><div class="filters" id="faction-filters" aria-label="계열 선택"></div></div>
+          <p class="toolbar-help">두 분류를 조합할 수 있습니다. 예: 교직원 + 철혈계</p>
+        </div>
+        <div id="roster-grid" class="roster-grid"></div>
+      </div>
+    </section>
+
+    <section class="section targets-section" id="targets" aria-labelledby="targets-title">
+      <div class="wrap">
+        <div class="section-heading split"><div><p class="section-eyebrow danger-text">04 / RESTRICTED FILES</p><h2 id="targets-title">이 시대의 &#x27;전설&#x27;</h2><p>그 결말이 어떻게 되든, 이야기의 중대한 부분이 될 터다</p></div><button type="button" class="relock" id="hide-all-bosses">모두 다시 가리기 <span aria-hidden="true">↶</span></button></div>
+        <div class="spoiler-notice"><span aria-hidden="true">◈</span><span>⚠️중요 스포일러가 포함되어 있으므로 플레이 후 열람을 권장합니다.</span></div>
+        <div class="boss-grid" id="boss-grid"></div>
       </div>
     </section>
 
