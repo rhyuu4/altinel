@@ -386,6 +386,19 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .profile-dialog.is-boss .combat-grid dd{color:#ffe1e9}
 .profile-dialog.is-boss .modal-close,.profile-dialog.is-boss .action-subtle{background:#4c172b;border-color:#b75a75;color:#ffe0e9}
 .profile-dialog.is-boss .modal-close:hover,.profile-dialog.is-boss .action-subtle:hover{background:#6a243d}
+
+/* Soft ambient bloom, kept transparent and clear of all pointer interactions. */
+main::after{
+ content:"";position:fixed;inset:0;z-index:20;pointer-events:none;
+ background:
+  radial-gradient(ellipse 250px 190px at 87% 17%,rgba(255,225,171,.12),transparent 75%),
+  radial-gradient(ellipse 220px 170px at 9% 73%,rgba(179,226,247,.09),transparent 75%),
+  radial-gradient(circle 43px at 91% 35%,rgba(255,241,207,.13),rgba(255,234,185,.04) 40%,transparent 75%),
+  radial-gradient(circle 30px at 12% 24%,rgba(255,243,217,.12),rgba(255,236,193,.03) 40%,transparent 75%),
+  radial-gradient(circle 54px at 80% 83%,rgba(219,239,255,.09),transparent 75%);
+}
+@media(min-width:981px){main::after{inset-inline:5%}}
+@media(max-width:720px){main::after{opacity:.65}}
 </style>
   <script>
 /*
