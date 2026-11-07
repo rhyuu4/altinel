@@ -71,7 +71,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .site-header .nav-toggle{color:#172436;border-color:#79654899}
 .site-header .mobile-nav{background:rgba(252,253,251,.97);box-shadow:0 16px 20px rgba(10,22,34,.16)}
 .hero-landscape{position:relative;min-height:780px;min-height:100svh;width:100%;isolation:isolate;overflow:hidden;border-bottom:none;background:#dbeff2}
-.hero-landscape .hero-image{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(90deg,rgba(246,249,245,.90) 0%,rgba(247,249,245,.80) 21%,rgba(242,246,242,.54) 38%,rgba(241,246,243,.16) 55%,rgba(242,246,244,0) 74%),linear-gradient(0deg,rgba(17,34,46,.25) 0%,transparent 21%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-repeat:no-repeat;background-size:cover;background-position:center center}
+.hero-landscape .hero-image{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(90deg,rgba(246,249,245,0.98) 0%,rgba(247,249,245,0.88) 21%,rgba(242,246,242,0.62) 38%,rgba(241,246,243,0.24) 55%,rgba(242,246,244,0) 74%),linear-gradient(0deg,rgba(17,34,46,.25) 0%,transparent 21%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-repeat:no-repeat;background-size:cover;background-position:center center}
 .hero-landscape .hero-landscape-layout{display:flex;align-items:center;min-height:780px;min-height:100svh;padding:140px 0 88px}
 /* Retain the removed eyebrow's space below the copy so centered content rises by its full height. */
 .hero-landscape-copy{width:min(670px,62%);padding-bottom:calc(15px * 1.58 + 8px)}
@@ -168,7 +168,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
   .site-header .site-bar{min-height:64px}
   .hero-landscape{min-height:710px;min-height:100svh}
   .hero-landscape .hero-landscape-layout{display:flex;min-height:710px;min-height:100svh;align-items:flex-start;flex-direction:column;justify-content:center;padding:110px 0 90px}
-  .hero-landscape .hero-image{background-image:linear-gradient(90deg,rgba(246,249,245,.94),rgba(245,250,246,.73) 45%,rgba(247,250,247,.22) 90%),linear-gradient(0deg,#142b3c55,transparent 18%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-position:67% center}
+  .hero-landscape .hero-image{background-image:linear-gradient(90deg,rgba(246,249,245,1.00),rgba(245,250,246,0.81) 45%,rgba(247,250,247,0.30) 90%),linear-gradient(0deg,#142b3c55,transparent 18%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-position:67% center}
   .hero-landscape-copy{width:100%}
   .hero-landscape h1{font-size:clamp(35px,7vw,52px);line-height:1.452}
   .hero-landscape .hero-sub{font-size:13px;line-height:1.78}
@@ -278,7 +278,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 @media(max-width:720px){
  .hero-landscape .hero-image{
    background-color:#b9dced;
-   background-image:linear-gradient(90deg,rgba(248,250,249,.76) 0%,rgba(249,251,251,.54) 41%,rgba(250,252,250,.08) 100%),linear-gradient(0deg,rgba(208,230,236,.18),transparent 20%),url('assets/title-landscape.webp?v=d5f8e45be2bd');
+   background-image:linear-gradient(90deg,rgba(248,250,249,0.84) 0%,rgba(249,251,251,0.62) 41%,rgba(250,252,250,0.16) 100%),linear-gradient(0deg,rgba(208,230,236,.18),transparent 20%),url('assets/title-landscape.webp?v=d5f8e45be2bd');
    background-repeat:no-repeat;
    background-size:100% 100%,100% 100%,auto 94%;
    background-position:center,center,57% bottom;
@@ -406,6 +406,20 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
  .light-particles span:nth-child(n+10){display:none}
 }
 @media(prefers-reduced-motion:reduce){.light-particles{display:none}}
+
+/* Keep the title in place while grouping the world summary above the scroll hint. */
+.hero-landscape-copy{
+ --hero-summary-space:calc(34px + 18px + 22px + 1px + 29px * 1.58 + 12px * 1.58 + 2px);
+ padding-bottom:calc(15px * 1.58 + 8px + var(--hero-summary-space));
+}
+.hero-landscape .hero-bottom{align-items:flex-end}
+.hero-bottom-info{display:flex;flex-direction:column;align-items:flex-end;gap:1em}
+.hero-landscape .hero-bottom .hero-stats{margin:0;padding:0;border:0;max-width:none;gap:28px;justify-content:flex-end;text-shadow:0 1px 5px rgba(255,255,255,.8);letter-spacing:0}
+.hero-scroll-hint{display:block}
+@media(max-width:720px){
+ .hero-landscape-copy{--hero-summary-space:calc(26px + 18px + 22px + 1px + 22px * 1.58 + 12px * 1.58 + 2px)}
+ .hero-landscape .hero-bottom .hero-stats{gap:22px}
+}
 </style>
   <script>
 /*
@@ -618,10 +632,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <h1 id="hero-title">무르익는 전설,<br>격동하는 시대<br><em>여울 속의 아카데미-</em></h1>
           <p class="hero-sub">펼쳐진 푸른 바다, 그 위에 세워진 중립의 아카데미 알티넬<br>서로 다른 출신과 신념을 지닌 이들이 모여<br>당신과 함께 새로운 이야기를 써 내려간다</p>
           <div class="hero-actions"><a class="action action-primary" href="#academy">학교 생활 살펴보기 ↗</a><a class="action action-hero-outline" href="#roster">인물 명부 열람 ↓</a></div>
-          <div class="hero-stats" aria-label="세계 정보"><div><strong>03</strong><span>대륙</span></div><div><strong>06</strong><span>국가</span></div><div><strong>31</strong><span>등장인물</span></div><div><strong>04</strong><span>보스</span></div></div>
         </div>
       </div>
-      <div class="hero-bottom wrap"><span>ACADEMY ALTINEL · CORAL ISLAND</span><span>SCROLL TO EXPLORE ↓</span></div>
+      <div class="hero-bottom wrap"><span>ACADEMY ALTINEL · CORAL ISLAND</span><div class="hero-bottom-info"><div class="hero-stats" aria-label="세계 정보"><div><strong>03</strong><span>대륙</span></div><div><strong>06</strong><span>국가</span></div><div><strong>31</strong><span>등장인물</span></div><div><strong>04</strong><span>보스</span></div></div><span class="hero-scroll-hint">SCROLL TO EXPLORE ↓</span></div></div>
     </section>
 
     <section class="section academy-section" id="academy" aria-labelledby="academy-title">
@@ -704,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-inner"><div><strong>✦ ACADEMY ALTINEL</strong><p>등장인물 중심 홍보 페이지 · V9 시안</p></div><div>VERSION 9.0 · 미공개 제작용 사이트</div></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><strong>✦ ACADEMY ALTINEL</strong></div></footer>
 
   <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="dialog-name">
     <button type="button" id="dialog-close" class="modal-close" aria-label="프로필 닫기">✕</button>
