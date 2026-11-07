@@ -420,7 +420,60 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
  .hero-landscape-copy{--hero-summary-space:calc(26px + 18px + 22px + 1px + 22px * 1.58 + 12px * 1.58 + 2px)}
  .hero-landscape .hero-bottom .hero-stats{gap:22px}
 }
+
+/* Image loading curtain, matching the navy and gold archive palette. */
+html.is-loading{overflow:hidden}
+html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
+.site-loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#0c1020;color:#e8c894;opacity:1;transition:opacity .65s ease}
+.site-loader.is-leaving{opacity:0;pointer-events:none}
+.site-loader-panel{width:min(340px,calc(100% - 64px));text-align:center}
+.site-loader-symbol{font-size:42px;line-height:1;margin-bottom:24px;color:#e8c894}
+.site-loader-brand{font:13px Georgia,serif;letter-spacing:.22em;margin:0 0 12px}
+.site-loader-title{font:24px 'Noto Serif KR','Malgun Gothic',serif;font-weight:400;letter-spacing:-.04em;margin:0 0 30px;color:#f2eee7}
+.site-loader-track{height:3px;background:rgba(232,200,148,.15);overflow:hidden;border-radius:2px}
+.site-loader-fill{height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#b99768,#f3dbab);transition:transform .18s ease}
+.site-loader-status{display:flex;justify-content:space-between;gap:16px;font-size:11px;color:#b6b9c2;margin:12px 0 0}
+@media(prefers-reduced-motion:reduce){.site-loader,.site-loader-fill{transition:none}}
 </style>
+  <link rel="stylesheet" href="assets/maps.css?v=map-copy-20261106">
+  <script src="assets/maps.js?v=map-copy-20261106" defer></script>
+  <script src="assets/loading.js?v=20261108" defer></script>
+</head>
+<body>
+  <div class="site-loader" id="site-loader" hidden>
+    <div class="site-loader-panel">
+      <div class="site-loader-symbol" aria-hidden="true">✦</div>
+      <p class="site-loader-brand">ACADEMY ALTINEL</p>
+      <p class="site-loader-title">아카데미 알티넬</p>
+      <div class="site-loader-track" role="progressbar" aria-label="이미지 준비" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="site-loader-fill"></div></div>
+      <p class="site-loader-status"><span role="status">장면을 준비하고 있습니다.</span><span class="site-loader-percent" aria-hidden="true">0%</span></p>
+    </div>
+  </div>
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const loader = document.getElementById('site-loader');
+    root.classList.add('is-loading');
+    document.body.setAttribute('aria-busy', 'true');
+    loader.hidden = false;
+    let finished = false;
+    window.altinelFinishLoading = () => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(window.altinelLoadingFallback);
+      root.classList.remove('is-loading');
+      document.body.removeAttribute('aria-busy');
+      loader.classList.add('is-leaving');
+      loader.addEventListener('transitionend', event => {
+        if (event.target === loader && event.propertyName === 'opacity') loader.remove();
+      });
+      setTimeout(() => loader.remove(), 700);
+    };
+    // Keep the site accessible if a script or network request fails to finish.
+    window.altinelLoadingFallback = setTimeout(window.altinelFinishLoading, 45000);
+  })();
+  </script>
+
   <script>
 /*
   아카데미 알티넬 · 사이트 콘텐츠 (V9)
@@ -600,10 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
-  <link rel="stylesheet" href="assets/maps.css?v=map-copy-20261106">
-  <script src="assets/maps.js?v=map-copy-20261106" defer></script>
-</head>
-<body>
+
   <a class="skip-link" href="#main">본문 바로가기</a>
   <header class="site-header" id="top">
     <div class="site-bar wrap">
