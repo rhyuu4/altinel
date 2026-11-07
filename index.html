@@ -387,18 +387,25 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .profile-dialog.is-boss .modal-close,.profile-dialog.is-boss .action-subtle{background:#4c172b;border-color:#b75a75;color:#ffe0e9}
 .profile-dialog.is-boss .modal-close:hover,.profile-dialog.is-boss .action-subtle:hover{background:#6a243d}
 
-/* Soft ambient bloom, kept transparent and clear of all pointer interactions. */
-main::after{
- content:"";position:fixed;inset:0;z-index:20;pointer-events:none;
- background:
-  radial-gradient(ellipse 250px 190px at 87% 17%,rgba(255,225,171,.12),transparent 75%),
-  radial-gradient(ellipse 220px 170px at 9% 73%,rgba(179,226,247,.09),transparent 75%),
-  radial-gradient(circle 43px at 91% 35%,rgba(255,241,207,.13),rgba(255,234,185,.04) 40%,transparent 75%),
-  radial-gradient(circle 30px at 12% 24%,rgba(255,243,217,.12),rgba(255,236,193,.03) 40%,transparent 75%),
-  radial-gradient(circle 54px at 80% 83%,rgba(219,239,255,.09),transparent 75%);
+/* Faint light motes drifting together toward the upper right. */
+.light-particles{position:fixed;inset:0;z-index:20;pointer-events:none;overflow:hidden;contain:strict}
+.light-particles span{
+ position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;opacity:0;
+ background:radial-gradient(circle,rgba(255,248,221,.9) 0%,rgba(255,233,179,.35) 35%,transparent 72%);
+ animation:light-particle-drift var(--duration) linear var(--delay) infinite;
 }
-@media(min-width:981px){main::after{inset-inline:5%}}
-@media(max-width:720px){main::after{opacity:.65}}
+@keyframes light-particle-drift{
+ 0%{transform:translate3d(-10vw,18vh,0);opacity:0}
+ 15%{opacity:.4}
+ 85%{opacity:.4}
+ 100%{transform:translate3d(10vw,-18vh,0);opacity:0}
+}
+@media(min-width:981px){.light-particles{inset-inline:5%}}
+@media(max-width:720px){
+ .light-particles{opacity:.7}
+ .light-particles span:nth-child(n+10){display:none}
+}
+@media(prefers-reduced-motion:reduce){.light-particles{display:none}}
 </style>
   <script>
 /*
@@ -723,5 +730,25 @@ document.addEventListener('DOMContentLoaded', () => {
     </div></div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div class="light-particles" aria-hidden="true">
+    <span style="--x:6%;--y:22%;--size:5px;--duration:38s;--delay:-7s"></span>
+    <span style="--x:16%;--y:77%;--size:7px;--duration:45s;--delay:-31s"></span>
+    <span style="--x:25%;--y:43%;--size:4px;--duration:42s;--delay:-18s"></span>
+    <span style="--x:32%;--y:91%;--size:6px;--duration:48s;--delay:-39s"></span>
+    <span style="--x:44%;--y:18%;--size:5px;--duration:40s;--delay:-23s"></span>
+    <span style="--x:55%;--y:63%;--size:7px;--duration:46s;--delay:-10s"></span>
+    <span style="--x:66%;--y:34%;--size:6px;--duration:43s;--delay:-33s"></span>
+    <span style="--x:78%;--y:83%;--size:5px;--duration:47s;--delay:-19s"></span>
+    <span style="--x:89%;--y:52%;--size:7px;--duration:41s;--delay:-29s"></span>
+    <span style="--x:12%;--y:51%;--size:4px;--duration:44s;--delay:-5s"></span>
+    <span style="--x:22%;--y:13%;--size:6px;--duration:49s;--delay:-36s"></span>
+    <span style="--x:36%;--y:65%;--size:5px;--duration:39s;--delay:-14s"></span>
+    <span style="--x:47%;--y:39%;--size:7px;--duration:46s;--delay:-28s"></span>
+    <span style="--x:58%;--y:94%;--size:4px;--duration:42s;--delay:-37s"></span>
+    <span style="--x:69%;--y:12%;--size:5px;--duration:48s;--delay:-22s"></span>
+    <span style="--x:81%;--y:62%;--size:6px;--duration:40s;--delay:-8s"></span>
+    <span style="--x:93%;--y:28%;--size:4px;--duration:45s;--delay:-34s"></span>
+    <span style="--x:96%;--y:96%;--size:6px;--duration:43s;--delay:-16s"></span>
+  </div>
 </body>
 </html>
