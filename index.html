@@ -78,7 +78,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .hero-landscape .microline{color:#6f501e;font-size:12px;font-weight:800;letter-spacing:.15em}
 .hero-landscape .micro-decor{background:#a16d20;height:2px}
 .hero-landscape .hero-eyebrow{color:#233b4b;font-size:15px;font-weight:800;letter-spacing:.02em}
-.hero-landscape h1{font-family:'Noto Serif KR','Malgun Gothic',Georgia,serif;color:#142536;font-weight:400;font-size:clamp(41px,4.1vw,70px);line-height:1.29;white-space:normal;letter-spacing:-.065em;margin:0 0 22px;text-shadow:0 1px 0 #fff7}
+.hero-landscape h1{font-family:'Noto Serif KR','Malgun Gothic',Georgia,serif;color:#142536;font-weight:400;font-size:clamp(41px,4.1vw,70px);line-height:1.419;white-space:normal;letter-spacing:-.065em;margin:0 0 22px;text-shadow:0 1px 0 #fff7}
 .hero-landscape h1 em{color:#98681e;font-weight:400;text-shadow:0 1px 0 #fff9}
 .hero-landscape .hero-sub{font-size:15px;font-weight:650;line-height:1.95;color:#283f50;text-shadow:0 1px 0 #fffa}
 .hero-landscape .hero-stats{border-top:1px solid rgba(31,46,53,.22);max-width:550px;margin-top:34px;padding-top:18px;gap:36px}
@@ -170,7 +170,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
   .hero-landscape .hero-landscape-layout{display:flex;min-height:710px;min-height:100svh;align-items:flex-start;flex-direction:column;justify-content:center;padding:110px 0 90px}
   .hero-landscape .hero-image{background-image:linear-gradient(90deg,rgba(246,249,245,.94),rgba(245,250,246,.73) 45%,rgba(247,250,247,.22) 90%),linear-gradient(0deg,#142b3c55,transparent 18%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-position:67% center}
   .hero-landscape-copy{width:100%}
-  .hero-landscape h1{font-size:clamp(35px,7vw,52px);line-height:1.32}
+  .hero-landscape h1{font-size:clamp(35px,7vw,52px);line-height:1.452}
   .hero-landscape .hero-sub{font-size:13px;line-height:1.78}
   .hero-landscape .hero-stats{gap:22px;margin-top:26px}
   .hero-landscape .hero-stats strong{font-size:22px}
@@ -331,6 +331,9 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
  .continent-crest-wrap{min-height:104px;padding:10px 0 8px}
  .continent-crest{width:min(138px,46vw);max-height:138px}
 }
+
+/* Desktop page gutters; tablet and mobile retain their existing layout. */
+@media(min-width:981px){body{margin-inline:5%}}
 
 /* V9 long headline wrapping */
 .hero-landscape h1{word-break:keep-all;overflow-wrap:break-word;}
