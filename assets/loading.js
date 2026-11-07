@@ -87,7 +87,7 @@
       await Promise.all(Array.from({length: Math.min(6, sources.length)}, worker));
       loader.dataset.failed = String(failed);
       if (!document.documentElement.classList.contains('is-loading')) return;
-      loader.querySelector('[role="status"]').textContent = '준비되었습니다.';
+      loader.querySelector('[role="status"]').textContent = '열람 준비 완료';
       // Give the final progress update a paint before the navy curtain fades away.
       await new Promise(resolve => setTimeout(resolve, Math.max(180, 600 - (performance.now() - started))));
     } finally {
