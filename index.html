@@ -73,7 +73,8 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .hero-landscape{position:relative;min-height:780px;min-height:100svh;width:100%;isolation:isolate;overflow:hidden;border-bottom:none;background:#dbeff2}
 .hero-landscape .hero-image{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(90deg,rgba(246,249,245,.90) 0%,rgba(247,249,245,.80) 21%,rgba(242,246,242,.54) 38%,rgba(241,246,243,.16) 55%,rgba(242,246,244,0) 74%),linear-gradient(0deg,rgba(17,34,46,.25) 0%,transparent 21%),url('assets/title-landscape.webp?v=d5f8e45be2bd');background-repeat:no-repeat;background-size:cover;background-position:center center}
 .hero-landscape .hero-landscape-layout{display:flex;align-items:center;min-height:780px;min-height:100svh;padding:140px 0 88px}
-.hero-landscape-copy{width:min(670px,62%)}
+/* Retain the removed eyebrow's space below the copy so centered content rises by its full height. */
+.hero-landscape-copy{width:min(670px,62%);padding-bottom:calc(15px * 1.58 + 8px)}
 .hero-landscape .microline{color:#6f501e;font-size:12px;font-weight:800;letter-spacing:.15em}
 .hero-landscape .micro-decor{background:#a16d20;height:2px}
 .hero-landscape .hero-eyebrow{color:#233b4b;font-size:15px;font-weight:800;letter-spacing:.02em}
@@ -339,6 +340,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 /* Crop horizontal overflow 20% from the left and 80% from the right. */
 .hero-landscape .hero-image{transform:none;background-size:100% 100%,100% 100%,cover;background-position:center,center,20% top}
 @media(max-width:720px){
+ .hero-landscape-copy{transform:translateY(-5svh)}
  .hero-landscape .hero-image{background-position:center,center,calc(65% + 15vw) top}
  .hero-landscape .hero-sub{font-size:clamp(8px,2.5vw,12px)}
  .hero-landscape .hero-sub br{display:revert}
@@ -589,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="wrap hero-layout hero-landscape-layout">
         <div class="hero-copy hero-landscape-copy">
           <p class="microline"><span class="micro-decor"></span> THREE CONTINENTS · ONE ACADEMY</p>
-          <p class="hero-eyebrow">산호섬의 중립 지대</p>
+          <p class="hero-eyebrow" hidden></p>
           <h1 id="hero-title">무르익는 전설,<br>격동하는 시대<br><em>여울 속의 아카데미-</em></h1>
           <p class="hero-sub">펼쳐진 푸른 바다, 그 위에 세워진 중립의 아카데미 알티넬<br>서로 다른 출신과 신념을 지닌 이들이 모여<br>당신과 함께 새로운 이야기를 써 내려간다</p>
           <div class="hero-actions"><a class="action action-primary" href="#academy">학교 생활 살펴보기 ↗</a><a class="action action-hero-outline" href="#roster">인물 명부 열람 ↓</a></div>
