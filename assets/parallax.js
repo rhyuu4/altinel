@@ -1,4 +1,4 @@
-/* A small, bounded background offset; never changes native scroll behavior or title text. */
+/* Bounded title parallax and visibility state for the decorative title particles. */
 (() => {
   'use strict';
   const hero = document.querySelector('.hero-landscape');
@@ -29,7 +29,7 @@
       schedule();
     };
     const onScroll = () => { if (visible) schedule(); };
-    hero.classList.add('has-parallax');
+    hero.classList.add('has-parallax', 'is-title-visible');
     measure();
     window.addEventListener('scroll', onScroll, {passive: true});
     window.addEventListener('resize', measure);
@@ -37,6 +37,7 @@
     if ('IntersectionObserver' in window) {
       visibility = new IntersectionObserver(entries => {
         visible = entries[0].isIntersecting;
+        hero.classList.toggle('is-title-visible', visible);
         schedule();
       });
       visibility.observe(hero);
@@ -54,7 +55,7 @@
       resize?.disconnect();
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', measure);
-      hero.classList.remove('has-parallax');
+      hero.classList.remove('has-parallax', 'is-title-visible');
       image.style.removeProperty('--hero-parallax-y');
     };
   };

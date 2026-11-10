@@ -523,12 +523,29 @@ html{scrollbar-gutter:stable}
 #academy-title,.academy-intro-copy>strong,.mini-schedule td:nth-child(2){font-weight:700!important}
 
 .mini-schedule .final-exam td:nth-child(2){color:#111}
+
+/* Stronger light dust stays clipped to the title image; the site's ambient layer is unchanged. */
+.hero-dust{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict}
+.hero-dust span{
+ position:absolute;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;opacity:0;
+ background:radial-gradient(circle,rgba(255,248,221,.9) 0%,rgba(255,233,179,.35) 35%,transparent 72%);
+ animation:hero-dust-drift var(--duration) linear var(--delay) infinite;animation-play-state:paused;
+}
+.hero-landscape.is-title-visible .hero-dust span{animation-play-state:running}
+@keyframes hero-dust-drift{
+ 0%{transform:translate3d(-10vw,18vh,0);opacity:0}
+ 15%{opacity:.4}
+ 85%{opacity:.4}
+ 100%{transform:translate3d(10vw,-18vh,0);opacity:0}
+}
+@media(max-width:720px){.hero-dust{opacity:.7}.hero-dust span:nth-child(n+10){display:none}}
+@media(prefers-reduced-motion:reduce){.hero-dust{display:none}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
-  <script src="assets/parallax.js?v=20261110-boost2" defer></script>
+  <script src="assets/parallax.js?v=20261110-title-dust" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
@@ -769,6 +786,26 @@ document.addEventListener('DOMContentLoaded', () => {
   <main id="main">
     <section class="hero hero-landscape" aria-labelledby="hero-title">
       <div class="hero-image" aria-hidden="true"></div>
+      <div class="hero-dust" aria-hidden="true">
+        <span style="--x:17%;--y:29%;--size:20px;--duration:9.5s;--delay:-1.75s"></span>
+        <span style="--x:27%;--y:84%;--size:28px;--duration:11.25s;--delay:-7.75s"></span>
+        <span style="--x:36%;--y:50%;--size:16px;--duration:10.5s;--delay:-4.5s"></span>
+        <span style="--x:43%;--y:98%;--size:24px;--duration:12s;--delay:-9.75s"></span>
+        <span style="--x:55%;--y:25%;--size:20px;--duration:10s;--delay:-5.75s"></span>
+        <span style="--x:66%;--y:70%;--size:28px;--duration:11.5s;--delay:-2.5s"></span>
+        <span style="--x:77%;--y:41%;--size:24px;--duration:10.75s;--delay:-8.25s"></span>
+        <span style="--x:89%;--y:90%;--size:20px;--duration:11.75s;--delay:-4.75s"></span>
+        <span style="--x:0%;--y:59%;--size:28px;--duration:10.25s;--delay:-7.25s"></span>
+        <span style="--x:23%;--y:58%;--size:16px;--duration:11s;--delay:-1.25s"></span>
+        <span style="--x:33%;--y:20%;--size:24px;--duration:12.25s;--delay:-9s"></span>
+        <span style="--x:47%;--y:72%;--size:20px;--duration:9.75s;--delay:-3.5s"></span>
+        <span style="--x:58%;--y:46%;--size:28px;--duration:11.5s;--delay:-7s"></span>
+        <span style="--x:69%;--y:1%;--size:16px;--duration:10.5s;--delay:-9.25s"></span>
+        <span style="--x:80%;--y:19%;--size:20px;--duration:12s;--delay:-5.5s"></span>
+        <span style="--x:92%;--y:69%;--size:24px;--duration:10s;--delay:-2s"></span>
+        <span style="--x:4%;--y:35%;--size:16px;--duration:11.25s;--delay:-8.5s"></span>
+        <span style="--x:7%;--y:3%;--size:24px;--duration:10.75s;--delay:-4s"></span>
+      </div>
       <div class="wrap hero-layout hero-landscape-layout">
         <div class="hero-copy hero-landscape-copy">
           <p class="microline"><span class="micro-decor"></span> THREE CONTINENTS · ONE ACADEMY</p>
