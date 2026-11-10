@@ -25,7 +25,7 @@
       top = rect.top + window.scrollY;
       height = Math.max(1, rect.height);
       const mobile = window.innerWidth <= 720;
-      limit = Math.min(height * .04, mobile ? 24 : 40) * (mobile ? 2 : 3);
+      limit = Math.min(height * .04, mobile ? 24 : 40) * (mobile ? 3 : 6);
       schedule();
     };
     const onScroll = () => { if (visible) schedule(); };

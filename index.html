@@ -80,7 +80,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .hero-landscape .micro-decor{background:#a16d20;height:2px}
 .hero-landscape .hero-eyebrow{color:#233b4b;font-size:calc(15px * var(--text-scale));font-weight:800;letter-spacing:.02em}
 .hero-landscape h1{font-family:'Noto Serif KR','Malgun Gothic',Georgia,serif;color:#142536;font-weight:400;font-size:calc(clamp(41px,4.1vw,70px) * var(--text-scale));line-height:1.419;white-space:normal;letter-spacing:-.065em;margin:0 0 22px;text-shadow:0 1px 0 #fff7}
-.hero-landscape h1 em{color:#98681e;font-weight:400;text-shadow:0 1px 0 #fff9}
+.hero-landscape h1 em{color:#98681e;font-weight:400;text-shadow:0 1px 2px rgba(255,255,255,.95),0 0 12px rgba(255,255,255,.85)}
 .hero-landscape .hero-sub{font-size:calc(15px * var(--text-scale));font-weight:650;line-height:1.95;color:#283f50;text-shadow:0 1px 0 #fffa}
 .hero-landscape .hero-stats{border-top:1px solid rgba(31,46,53,.22);max-width:550px;margin-top:34px;padding-top:18px;gap:36px}
 .hero-landscape .hero-stats strong{color:#92631e;font-weight:700;font-size:calc(29px * var(--text-scale))}
@@ -516,13 +516,14 @@ html{scrollbar-gutter:stable}
 /* Slower card reveals and a lightly enlarged background for gap-free parallax. */
 .roster-card.scroll-reveal,.boss-card.scroll-reveal{transition-duration:.7s}
 .hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.1);transform-origin:center;will-change:transform}
+@media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
 @media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;will-change:auto}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
-  <script src="assets/parallax.js?v=20261110-stronger" defer></script>
+  <script src="assets/parallax.js?v=20261110-boost2" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
