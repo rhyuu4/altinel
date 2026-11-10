@@ -490,6 +490,13 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 .roster-card .card-button{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
 .roster-card .roster-portrait{flex:0 0 auto;width:100%}
 .roster-card .roster-body{flex:1}
+
+/* Small composition shifts: Heidi right, and the specified portraits left. */
+.profile-dialog[data-profile-id="06"] .modal-art .portrait-img{object-position:25% top}
+.profile-dialog:is([data-profile-id="02"],[data-profile-id="17"],[data-profile-id="18"],[data-profile-id="23"],[data-profile-id="B1"],[data-profile-id="B2"],[data-profile-id="B3"],[data-profile-id="B4"]) .modal-art .portrait-img{object-position:75% top}
+@media(min-width:981px){
+ .profile-dialog:is([data-profile-id="02"],[data-profile-id="17"],[data-profile-id="18"],[data-profile-id="23"],[data-profile-id="B1"],[data-profile-id="B2"],[data-profile-id="B3"],[data-profile-id="B4"]) .modal-art .portrait-img{object-position:25% top}
+}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
