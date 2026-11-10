@@ -30,6 +30,7 @@
     add('assets/world-parchment.webp');
     const scanRules = rules => {
       for (const rule of rules) {
+        if (rule.type === CSSRule.FONT_FACE_RULE) continue; // Fonts are not image resources.
         if (rule.style) {
           const pattern = /url\(\s*(?:"([^"]*)"|'([^']*)'|([^)]*))\s*\)/g;
           for (const match of rule.style.cssText.matchAll(pattern)) add(match[1] || match[2] || match[3]);
@@ -84,7 +85,11 @@
     };
     try {
       update();
-      await Promise.all(Array.from({length: Math.min(6, sources.length)}, worker));
+      const fontsReady = document.fonts ? new Promise(resolve => {
+        const timer = setTimeout(resolve, 8000);
+        document.fonts.ready.then(() => { clearTimeout(timer); resolve(); }, () => { clearTimeout(timer); resolve(); });
+      }) : Promise.resolve();
+      await Promise.all([fontsReady, ...Array.from({length: Math.min(6, sources.length)}, worker)]);
       loader.dataset.failed = String(failed);
       if (!document.documentElement.classList.contains('is-loading')) return;
       loader.querySelector('[role="status"]').textContent = '열람 준비 완료';

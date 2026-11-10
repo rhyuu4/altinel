@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#edf2f3">
   <meta name="description" content="아카데미 알티넬 — 세 대륙 사이의 학교, 27명의 등장인물과 네 보스의 캐릭터 아카이브.">
   <title>아카데미 알티넬 | 등장인물 · 전투 기록</title>
+  <link rel="stylesheet" href="assets/fonts/altinel-serif.css?v=5.3.1">
   <style>
 :root{--bg:#0c1020;--bg-deep:#090c16;--panel:#131a2b;--panel-light:#192339;--ink:#f2eee7;--muted:#b6b9c2;--faint:#818897;--gold:#e8c894;--gold-soft:#b99768;--border:rgba(240,231,211,.13);--red:#d88b91;--max:1200px}
 *{box-sizing:border-box}
@@ -444,10 +445,17 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
  .profile-dialog{width:min(1017px,calc(90% - 25.2px))}
 }
 @media(max-width:480px){.hero-credit{display:none}}
+
+/* One light serif family throughout the site, with the atlas typography preserved. */
+:where(body,body *):not(:where(#setting,#setting *)){
+ font-family:'Altinel Serif','Noto Serif CJK KR','AppleMyungjo','Batang',Georgia,serif!important;
+ font-weight:350!important;
+}
+#setting{font-family:system-ui,-apple-system,'Noto Sans KR','Malgun Gothic',sans-serif;font-weight:400}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=map-copy-20261106">
   <script src="assets/maps.js?v=map-copy-20261108-breaks" defer></script>
-  <script src="assets/loading.js?v=20261108-copy2" defer></script>
+  <script src="assets/loading.js?v=20261110-serif" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
