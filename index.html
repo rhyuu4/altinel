@@ -497,10 +497,26 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 @media(min-width:981px){
  .profile-dialog:is([data-profile-id="02"],[data-profile-id="17"],[data-profile-id="18"],[data-profile-id="23"],[data-profile-id="B1"],[data-profile-id="B2"],[data-profile-id="B3"],[data-profile-id="B4"]) .modal-art .portrait-img{object-position:75% top}
 }
+
+/* Navy and gold native scrollbars, including the dossier's scroll area. */
+html{scrollbar-gutter:stable}
+*{scrollbar-width:thin;scrollbar-color:#b99768 #0c1020}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#0c1020}
+::-webkit-scrollbar-thumb{background:#b99768;border:2px solid #0c1020;border-radius:12px}
+::-webkit-scrollbar-thumb:hover{background:#e8c894}
+/* Content stays visible without JavaScript; only observed elements receive this class. */
+.scroll-reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;transition-delay:var(--reveal-delay,0ms)}
+.scroll-reveal.is-revealed{opacity:1;transform:none}
+.scroll-reveal:focus-within{opacity:1;transform:none;transition:none}
+@media(max-width:720px){.scroll-reveal{transform:translateY(8px);transition-duration:.42s}.scroll-reveal.is-revealed{transform:none}}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;transform:none!important;transition:none!important}}
+@media(forced-colors:active){*{scrollbar-color:auto}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
+  <script src="assets/reveal.js?v=20261110" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
@@ -526,6 +542,7 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
       clearTimeout(window.altinelLoadingFallback);
       root.classList.remove('is-loading');
       document.body.removeAttribute('aria-busy');
+      window.dispatchEvent(new Event('altinel:ready'));
       loader.classList.add('is-leaving');
       loader.addEventListener('transitionend', event => {
         if (event.target === loader && event.propertyName === 'opacity') loader.remove();
