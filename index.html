@@ -442,6 +442,7 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 @media(min-width:981px){
  .wrap{width:min(calc(var(--max) * .9),calc(90% - 64.8px))}
  .hero-landscape .hero-image{inset:0}
+ .hero-landscape-copy{transform:translateY(-10svh)}
  .profile-dialog{width:min(1017px,calc(90% - 25.2px))}
 }
 @media(max-width:480px){.hero-credit{display:none}}
@@ -460,7 +461,7 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 .boss-sealed-title{display:block;font-size:1.1em}
 .boss-sealed-note{display:block}
 </style>
-  <link rel="stylesheet" href="assets/maps.css?v=20261110-text-size">
+  <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=map-copy-20261108-breaks" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
 </head>
@@ -816,7 +817,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </section>
       <p class="modal-description" id="dialog-description"></p>
       <div class="modal-actions"><button type="button" class="action action-subtle" id="dialog-close-secondary">닫기</button></div>
-      <p class="modal-caption">인물의 나이는 알티넬 개교 98주기를 기준으로 합니다.</p>
+      <p class="modal-caption">인물 프로필은 알티넬 개교 98주기, 3월을 기준으로 합니다.</p>
     </div></div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
