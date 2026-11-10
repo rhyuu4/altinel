@@ -24,7 +24,8 @@
       const rect = hero.getBoundingClientRect();
       top = rect.top + window.scrollY;
       height = Math.max(1, rect.height);
-      limit = Math.min(height * .04, window.innerWidth <= 720 ? 24 : 40);
+      const mobile = window.innerWidth <= 720;
+      limit = Math.min(height * .04, mobile ? 24 : 40) * (mobile ? 2 : 3);
       schedule();
     };
     const onScroll = () => { if (visible) schedule(); };
