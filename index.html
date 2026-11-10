@@ -480,13 +480,16 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
  :root{--text-scale:1.08}
  #setting{--text-scale:1.2;font-size:18px}
 }
-/* Keep the six requested dossier compositions; reveal the left edge for the rest. */
+/* Keep the requested dossier compositions, including Heidi's restored framing. */
 @media(min-width:981px){
- .profile-dialog:not([data-profile-id="01"],[data-profile-id="03"],[data-profile-id="09"],[data-profile-id="16"],[data-profile-id="21"],[data-profile-id="26"]) .modal-art .portrait-img{object-position:left top}
+ .profile-dialog:not([data-profile-id="01"],[data-profile-id="03"],[data-profile-id="06"],[data-profile-id="09"],[data-profile-id="16"],[data-profile-id="21"],[data-profile-id="26"]) .modal-art .portrait-img{object-position:left top}
 }
-/* A centered side crop brings Heidi's dossier framing in line with the others. */
-.profile-dialog[data-profile-id="06"] .modal-art .portrait-img{object-position:25% top;transform:scale(1.12);transform-origin:center top}
 .hero-actions .action{font-weight:700!important}
+
+/* Anchor every portrait at the card top even when neighboring descriptions are taller. */
+.roster-card .card-button{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+.roster-card .roster-portrait{flex:0 0 auto;width:100%}
+.roster-card .roster-body{flex:1}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
