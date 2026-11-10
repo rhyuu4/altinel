@@ -512,11 +512,17 @@ html{scrollbar-gutter:stable}
 @media(max-width:720px){.scroll-reveal{transform:translateY(8px);transition-duration:.42s}.scroll-reveal.is-revealed{transform:none}}
 @media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;transform:none!important;transition:none!important}}
 @media(forced-colors:active){*{scrollbar-color:auto}}
+
+/* Slower card reveals and a lightly enlarged background for gap-free parallax. */
+.roster-card.scroll-reveal,.boss-card.scroll-reveal{transition-duration:.7s}
+.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.1);transform-origin:center;will-change:transform}
+@media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;will-change:auto}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
+  <script src="assets/parallax.js?v=20261110" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
