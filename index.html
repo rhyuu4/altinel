@@ -474,6 +474,19 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 /* Give dossier text a little breathing room beside or below the artwork. */
 @media(min-width:721px){.profile-dialog .modal-text{padding-left:24px}}
 @media(max-width:720px){.profile-dialog .modal-text{padding-top:26px}}
+
+/* Smaller mobile reading text; atlas and principal titles retain their sizes. */
+@media(max-width:720px){
+ :root{--text-scale:1.08}
+ #setting{--text-scale:1.2;font-size:18px}
+}
+/* Keep the six requested dossier compositions; reveal the left edge for the rest. */
+@media(min-width:981px){
+ .profile-dialog:not([data-profile-id="01"],[data-profile-id="03"],[data-profile-id="09"],[data-profile-id="16"],[data-profile-id="21"],[data-profile-id="26"]) .modal-art .portrait-img{object-position:left top}
+}
+/* A centered side crop brings Heidi's dossier framing in line with the others. */
+.profile-dialog[data-profile-id="06"] .modal-art .portrait-img{object-position:25% top;transform:scale(1.12);transform-origin:center top}
+.hero-actions .action{font-weight:700!important}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
@@ -612,6 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setText(id, text) { $(`#${id}`).textContent = text; }
   function openProfile(person, isBoss) {
     dialog.classList.toggle('is-boss', isBoss);
+    dialog.dataset.profileId = person.id;
     const combat = person.combat || {};
     setText('dialog-type', isBoss ? ALTINEL_UI.bossDossier : ALTINEL_UI.castDossier);
     setText('dialog-name', person.name);
