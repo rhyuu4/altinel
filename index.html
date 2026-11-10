@@ -470,6 +470,10 @@ html.is-loading body>:not(#site-loader):not(script){visibility:hidden}
 @media(min-width:721px){.profile-dialog .modal-art .art-placeholder{height:100%!important}}
 @media(min-width:981px){.profile-dialog{width:min(1130px,calc(96% - 16px))}}
 @media(max-width:480px){.profile-dialog{width:calc(100% - 8px)}}
+
+/* Give dossier text a little breathing room beside or below the artwork. */
+@media(min-width:721px){.profile-dialog .modal-text{padding-left:24px}}
+@media(max-width:720px){.profile-dialog .modal-text{padding-top:26px}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
   <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
