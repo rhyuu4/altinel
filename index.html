@@ -528,7 +528,7 @@ html{scrollbar-gutter:stable}
 @keyframes hero-image-pan{from{translate:4.5% 0}to{translate:-4.5% 0}}
 /* Pan the full mobile landscape; an eased offset starts left of center, moving right. */
 @keyframes hero-image-pan-mobile{from{background-position:center,center,100% top}to{background-position:center,center,0% top}}
-@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-name:hero-image-pan-mobile;animation-duration:var(--hero-mobile-pan-duration,180s);animation-delay:var(--hero-mobile-pan-delay,-74.024816651s);background-position:center,center,65% top;transform:none;translate:none;will-change:background-position}}
+@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-name:hero-image-pan-mobile;animation-duration:var(--hero-mobile-pan-duration,180s);animation-delay:var(--hero-mobile-pan-delay,-74.024816651s);background-position:center,center,65% top;background-size:100% 100%,100% 100%,var(--hero-mobile-bg-width,auto) var(--hero-mobile-bg-height,100%);transform:translate3d(0,var(--hero-parallax-y,0px),0);translate:none;will-change:transform,background-position}}
 @media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
 @media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;translate:none;animation:none;will-change:auto}}
 
@@ -558,7 +558,7 @@ html{scrollbar-gutter:stable}
   <script src="assets/maps.js?v=20261112-lake-100km" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
-  <script src="assets/parallax.js?v=20261112-left15-start" defer></script>
+  <script src="assets/parallax.js?v=20261112-mobile-parallax-fix" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>

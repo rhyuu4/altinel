@@ -14,6 +14,9 @@
     let top = 0;
     let height = 1;
     let limit = 0;
+    let mobileWidth = 0;
+    let mobileImageWidth = 0;
+    let mobileImageHeight = 0;
     const paint = () => {
       frame = 0;
       const progress = Math.min(1, Math.max(0, (window.scrollY - top) / height));
@@ -25,14 +28,24 @@
       top = rect.top + window.scrollY;
       height = Math.max(1, rect.height);
       const mobile = window.innerWidth <= 720;
-      // Previous mobile travel was 27% of the viewport in 68.7273 seconds.
-      // Traverse the entire cover-image overflow at 110% of that speed.
-      const imageRect = image.getBoundingClientRect();
-      const overflow = Math.max(0, imageRect.height * (1673 / 848) - imageRect.width);
-      const duration = Math.max(0.001, overflow / (imageRect.width * .27) * (68.7272727273 / 1.1));
-      image.style.setProperty('--hero-mobile-pan-duration', `${duration}s`);
-      // Begin 15% of the full travel farther left than center, accounting for easing.
-      image.style.setProperty('--hero-mobile-pan-delay', `${-duration * 0.411248981392}s`);
+      if (mobile) {
+        // Browser toolbar changes must not resize the artwork while scrolling.
+        const width = image.clientWidth;
+        if (width !== mobileWidth) {
+          mobileWidth = width;
+          mobileImageHeight = Math.max(image.clientHeight, width * (848 / 1673));
+          mobileImageWidth = mobileImageHeight * (1673 / 848);
+          image.style.setProperty('--hero-mobile-bg-width', `${mobileImageWidth}px`);
+          image.style.setProperty('--hero-mobile-bg-height', `${mobileImageHeight}px`);
+          // Keep the existing horizontal speed and starting position.
+          const overflow = Math.max(0, mobileImageWidth - width);
+          const duration = Math.max(0.001, overflow / (width * .27) * (68.7272727273 / 1.1));
+          image.style.setProperty('--hero-mobile-pan-duration', `${duration}s`);
+          image.style.setProperty('--hero-mobile-pan-delay', `${-duration * 0.411248981392}s`);
+        }
+      } else {
+        mobileWidth = 0;
+      }
       const strength = mobile ? 4.5 : window.innerWidth >= 981 ? 9 : 6;
       limit = Math.min(height * .04, mobile ? 24 : 40) * strength;
       schedule();
@@ -65,7 +78,7 @@
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', measure);
       hero.classList.remove('has-parallax', 'is-title-visible');
-      image.style.removeProperty('--hero-parallax-y');
+      for (const prop of ['--hero-parallax-y', '--hero-mobile-bg-width', '--hero-mobile-bg-height', '--hero-mobile-pan-duration', '--hero-mobile-pan-delay']) image.style.removeProperty(prop);
     };
   };
   const ready = () => {
