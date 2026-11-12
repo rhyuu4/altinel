@@ -526,9 +526,9 @@ html{scrollbar-gutter:stable}
 .hero-landscape.has-parallax .hero-image{animation:hero-image-pan 50.4s ease-in-out infinite alternate;animation-play-state:paused;will-change:transform,translate}
 .hero-landscape.has-parallax.is-title-visible .hero-image{animation-play-state:running}
 @keyframes hero-image-pan{from{translate:4.5% 0}to{translate:-4.5% 0}}
-/* Pan the full mobile landscape; a half-cycle offset starts centered, moving right. */
+/* Pan the full mobile landscape; an eased offset starts right of center, moving right. */
 @keyframes hero-image-pan-mobile{from{background-position:center,center,100% top}to{background-position:center,center,0% top}}
-@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-name:hero-image-pan-mobile;animation-duration:var(--hero-mobile-pan-duration,180s);animation-delay:var(--hero-mobile-pan-delay,-90s);background-position:center,center,50% top;transform:none;translate:none;will-change:background-position}}
+@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-name:hero-image-pan-mobile;animation-duration:var(--hero-mobile-pan-duration,180s);animation-delay:var(--hero-mobile-pan-delay,-124.236483475s);background-position:center,center,20% top;transform:none;translate:none;will-change:background-position}}
 @media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
 @media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;translate:none;animation:none;will-change:auto}}
 
@@ -558,7 +558,7 @@ html{scrollbar-gutter:stable}
   <script src="assets/maps.js?v=20261112-lake-100km" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
-  <script src="assets/parallax.js?v=20261112-full-mobile-pan" defer></script>
+  <script src="assets/parallax.js?v=20261112-right-start" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
