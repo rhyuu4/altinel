@@ -526,7 +526,8 @@ html{scrollbar-gutter:stable}
 .hero-landscape.has-parallax .hero-image{animation:hero-image-pan 50.4s ease-in-out infinite alternate;animation-play-state:paused;will-change:transform,translate}
 .hero-landscape.has-parallax.is-title-visible .hero-image{animation-play-state:running}
 @keyframes hero-image-pan{from{translate:4.5% 0}to{translate:-4.5% 0}}
-@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-duration:25.2s}}
+@keyframes hero-image-pan-mobile{from{translate:13.5% 0}to{translate:-13.5% 0}}
+@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-name:hero-image-pan-mobile;animation-duration:68.7272727273s;transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.3)}}
 @media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
 @media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;translate:none;animation:none;will-change:auto}}
 
