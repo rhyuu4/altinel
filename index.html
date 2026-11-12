@@ -526,6 +526,7 @@ html{scrollbar-gutter:stable}
 .hero-landscape.has-parallax .hero-image{animation:hero-image-pan 50.4s ease-in-out infinite alternate;animation-play-state:paused;will-change:transform,translate}
 .hero-landscape.has-parallax.is-title-visible .hero-image{animation-play-state:running}
 @keyframes hero-image-pan{from{translate:4.5% 0}to{translate:-4.5% 0}}
+@media(max-width:720px){.hero-landscape.has-parallax .hero-image{animation-duration:25.2s}}
 @media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
 @media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;translate:none;animation:none;will-change:auto}}
 
@@ -552,7 +553,7 @@ html{scrollbar-gutter:stable}
 @media(prefers-reduced-motion:reduce){.hero-dust{display:none}}
 </style>
   <link rel="stylesheet" href="assets/maps.css?v=20261110-map-below">
-  <script src="assets/maps.js?v=20261110-detail-kicker" defer></script>
+  <script src="assets/maps.js?v=20261112-lake-100km" defer></script>
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
   <script src="assets/parallax.js?v=20261110-pc-boost" defer></script>
