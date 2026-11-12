@@ -25,6 +25,13 @@
       top = rect.top + window.scrollY;
       height = Math.max(1, rect.height);
       const mobile = window.innerWidth <= 720;
+      // Previous mobile travel was 27% of the viewport in 68.7273 seconds.
+      // Traverse the entire cover-image overflow at 110% of that speed.
+      const imageRect = image.getBoundingClientRect();
+      const overflow = Math.max(0, imageRect.height * (1673 / 848) - imageRect.width);
+      const duration = Math.max(0.001, overflow / (imageRect.width * .27) * (68.7272727273 / 1.1));
+      image.style.setProperty('--hero-mobile-pan-duration', `${duration}s`);
+      image.style.setProperty('--hero-mobile-pan-delay', `${-duration / 2}s`);
       const strength = mobile ? 4.5 : window.innerWidth >= 981 ? 9 : 6;
       limit = Math.min(height * .04, mobile ? 24 : 40) * strength;
       schedule();
