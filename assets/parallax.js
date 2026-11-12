@@ -31,8 +31,8 @@
       const overflow = Math.max(0, imageRect.height * (1673 / 848) - imageRect.width);
       const duration = Math.max(0.001, overflow / (imageRect.width * .27) * (68.7272727273 / 1.1));
       image.style.setProperty('--hero-mobile-pan-duration', `${duration}s`);
-      // Begin 30% of the full travel farther right than center, accounting for easing.
-      image.style.setProperty('--hero-mobile-pan-delay', `${-duration * 0.690202685975}s`);
+      // Begin 30% of the full travel farther left than center, accounting for easing.
+      image.style.setProperty('--hero-mobile-pan-delay', `${-duration * 0.309797314025}s`);
       const strength = mobile ? 4.5 : window.innerWidth >= 981 ? 9 : 6;
       limit = Math.min(height * .04, mobile ? 24 : 40) * strength;
       schedule();
