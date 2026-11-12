@@ -523,8 +523,11 @@ html{scrollbar-gutter:stable}
 /* Slower card reveals and a lightly enlarged background for gap-free parallax. */
 .roster-card.scroll-reveal,.boss-card.scroll-reveal{transition-duration:.7s}
 .hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.1);transform-origin:center;will-change:transform}
+.hero-landscape.has-parallax .hero-image{animation:hero-image-pan 28s ease-in-out infinite alternate;animation-play-state:paused;will-change:transform,translate}
+.hero-landscape.has-parallax.is-title-visible .hero-image{animation-play-state:running}
+@keyframes hero-image-pan{from{translate:2.5% 0}to{translate:-2.5% 0}}
 @media(min-width:721px){.hero-landscape.has-parallax .hero-image{transform:translate3d(0,var(--hero-parallax-y,0px),0) scale(1.2)}}
-@media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;will-change:auto}}
+@media(prefers-reduced-motion:reduce){.hero-landscape.has-parallax .hero-image{transform:none;translate:none;animation:none;will-change:auto}}
 
 /* Emphasize the academy headings and calendar events without changing their sizes. */
 #academy-title,.academy-intro-copy>strong,.mini-schedule td:nth-child(2){font-weight:700!important}
