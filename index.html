@@ -559,6 +559,8 @@ html{scrollbar-gutter:stable}
   <script src="assets/loading.js?v=20261110-serif" defer></script>
   <script src="assets/reveal.js?v=20261110" defer></script>
   <script src="assets/parallax.js?v=20261112-mobile-parallax-fix" defer></script>
+  <link rel="stylesheet" href="assets/music.css?v=20261113-entry">
+  <script src="assets/music.js?v=20261113-entry" defer></script>
 </head>
 <body>
   <div class="site-loader" id="site-loader" hidden>
@@ -568,6 +570,11 @@ html{scrollbar-gutter:stable}
       <p class="site-loader-title">아카데미 알티넬</p>
       <div class="site-loader-track" role="progressbar" aria-label="이미지 준비" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="site-loader-fill"></div></div>
       <p class="site-loader-status"><span role="status">인물/세계 정보 불러오는 중</span><span class="site-loader-percent" aria-hidden="true">0%</span></p>
+      <div class="site-entry" id="site-entry" hidden>
+        <p>열람 준비가 완료되었습니다.<br>배경음악과 함께 알티넬에 입장하시겠습니까?</p>
+        <button type="button" class="entry-button" id="enter-with-music">음악과 함께 입장</button>
+        <button type="button" class="entry-button entry-button-quiet" id="enter-without-music">음악 없이 입장</button>
+      </div>
     </div>
   </div>
   <script>
@@ -577,20 +584,33 @@ html{scrollbar-gutter:stable}
     root.classList.add('is-loading');
     document.body.setAttribute('aria-busy', 'true');
     loader.hidden = false;
-    let finished = false;
+    let prepared = false;
+    let entered = false;
     window.altinelFinishLoading = () => {
-      if (finished) return;
-      finished = true;
+      if (prepared) return;
+      prepared = true;
       clearTimeout(window.altinelLoadingFallback);
-      root.classList.remove('is-loading');
       document.body.removeAttribute('aria-busy');
+      loader.querySelector('.site-loader-track').hidden = true;
+      loader.querySelector('.site-loader-status').hidden = true;
+      document.getElementById('site-entry').hidden = false;
+      document.getElementById('enter-with-music').focus({preventScroll:true});
+    };
+    const enter = music => {
+      if (!prepared || entered) return;
+      entered = true;
+      window.dispatchEvent(new CustomEvent('altinel:enter', {detail:{music}}));
+      root.classList.remove('is-loading');
       window.dispatchEvent(new Event('altinel:ready'));
       loader.classList.add('is-leaving');
+      document.querySelector('.wordmark')?.focus({preventScroll:true});
       loader.addEventListener('transitionend', event => {
         if (event.target === loader && event.propertyName === 'opacity') loader.remove();
       });
       setTimeout(() => loader.remove(), 700);
     };
+    document.getElementById('enter-with-music').addEventListener('click', () => enter(true));
+    document.getElementById('enter-without-music').addEventListener('click', () => enter(false));
     // Keep the site accessible if a script or network request fails to finish.
     window.altinelLoadingFallback = setTimeout(window.altinelFinishLoading, 45000);
   })();
@@ -921,7 +941,28 @@ document.addEventListener('DOMContentLoaded', () => {
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-inner"><strong>✦ ACADEMY ALTINEL</strong></div></footer>
+  <footer class="footer"><div class="wrap">
+    <div class="footer-inner"><strong>✦ ACADEMY ALTINEL</strong></div>
+    <section class="site-music" aria-label="배경음악">
+      <div class="music-controls">
+        <button type="button" id="music-toggle" aria-pressed="false">음악 재생</button>
+        <label for="music-track">배경음악</label>
+        <select id="music-track">
+          <option value="0">English Country Garden — Aaron Kenny</option>
+          <option value="1">Powdered Waltz — The Mini Vandals</option>
+          <option value="2">Invitation to the Castle Ball — Doug Maxwell</option>
+        </select>
+        <label class="music-volume" for="music-volume">음량 <input id="music-volume" type="range" min="0" max="100" value="35"></label>
+      </div>
+      <p id="music-status" role="status" aria-live="polite">배경음악이 꺼져 있습니다.</p>
+      <audio id="site-audio" preload="none"></audio>
+      <details class="music-credits"><summary>음악 출처 및 권리 안내</summary>
+        <ul><li>English Country Garden — Aaron Kenny</li><li>Powdered Waltz — The Mini Vandals</li><li>Invitation to the Castle Ball — Doug Maxwell</li></ul>
+        <p>음원 출처: <a href="https://www.youtube.com/audiolibrary" target="_blank" rel="noopener noreferrer">YouTube 오디오 보관함</a> · YouTube 오디오 보관함 라이선스</p>
+        <p>음악의 권리는 각 권리자에게 있습니다. 본 사이트 콘텐츠의 배경음악으로 사용하며, 음원 다운로드 서비스는 제공하지 않습니다. 권리 관련 이의나 삭제 요청이 접수되면 확인 후 해당 음원의 재생 및 게시를 중단하겠습니다.</p>
+      </details>
+    </section>
+  </div></footer>
 
   <dialog class="profile-dialog" id="profile-dialog" aria-labelledby="dialog-name">
     <button type="button" id="dialog-close" class="modal-close" aria-label="프로필 닫기">✕</button>
