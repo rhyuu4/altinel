@@ -21,11 +21,23 @@
 /* Bilingual campus names; three secondary locations use 70% of the base size. */
 .atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:48px;--campus-label-scale:1}
 .atlas-svg[data-atlas-mode=campus] .atlas-nameplate[data-compact=true]{--campus-label-scale:.7}
-.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:calc(calc(var(--campus-label-base)*var(--campus-label-scale)) * var(--text-scale));stroke-width:calc(6px*var(--campus-label-scale))}
-.atlas-svg[data-atlas-mode=campus] .atlas-zone-english{font-size:calc(calc(var(--campus-label-base)*var(--campus-label-scale)*.45) * var(--text-scale));stroke-width:calc(2.7px*var(--campus-label-scale));letter-spacing:.015em;font-weight:700}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-name{font-size:calc(calc(var(--campus-label-base)*var(--campus-label-scale)) * var(--text-scale));stroke-width:calc(4.2px*var(--campus-label-scale))}
+.atlas-svg[data-atlas-mode=campus] .atlas-zone-english{font-size:calc(calc(var(--campus-label-base)*var(--campus-label-scale)*.45) * var(--text-scale));stroke-width:calc(1.89px*var(--campus-label-scale));letter-spacing:.015em;font-weight:700}
 @media(max-width:720px){.atlas-svg[data-atlas-mode=campus] .atlas-nameplate{--campus-label-base:60px}}
 
 /* Two minor world regions receive a further 10% reduction. */
-.atlas-svg[data-atlas-mode=world] .atlas-country-name,.atlas-svg[data-atlas-mode=world] .atlas-zone-name{stroke-width:5.6px}
-.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]) .atlas-zone-name{font-size:calc(30px * var(--text-scale));stroke-width:5.04px}
+.atlas-svg[data-atlas-mode=world] .atlas-country-name,.atlas-svg[data-atlas-mode=world] .atlas-zone-name{stroke-width:3.92px}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]) .atlas-zone-name{font-size:calc(30px * var(--text-scale));stroke-width:3.528px}
 @media(max-width:720px){.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]) .atlas-zone-name{font-size:calc(34.8px * var(--text-scale))}}
+
+/* Bilingual world labels retain parchment colors and a classic serif face. */
+.atlas-svg[data-atlas-mode=campus] .atlas-nameplate:is([data-owner=dorm],[data-owner=town]){--campus-label-scale:.8}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate{--world-label-size:38.6667px;--world-label-stroke:3.92px}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate[data-owner=academy]{--world-label-size:33.3333px}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]){--world-label-size:30px;--world-label-stroke:3.528px}
+.atlas-svg[data-atlas-mode=world] .atlas-nameplate[data-owner] .atlas-world-english{font-family:Georgia,'Times New Roman',serif;font-size:calc(var(--world-label-size)*.45*var(--text-scale));stroke-width:calc(var(--world-label-stroke)*.45);font-weight:700;letter-spacing:.015em}
+@media(max-width:720px){
+ .atlas-svg[data-atlas-mode=world] .atlas-nameplate{--world-label-size:45.3333px}
+ .atlas-svg[data-atlas-mode=world] .atlas-nameplate[data-owner=academy]{--world-label-size:38.6667px}
+ .atlas-svg[data-atlas-mode=world] .atlas-nameplate:is([data-owner=lake],[data-owner=floren]){--world-label-size:34.8px}
+}

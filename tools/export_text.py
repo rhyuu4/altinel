@@ -75,7 +75,7 @@ def export(output):
  rows=[]
  for mode,items in regions.items():
   for item in items:rows.append([mode+'.'+item['id'],'교내 지도' if mode=='campus' else '세계지도',item['name'],item['category'],item['desc'],item.get('englishName','')])
- region_sheet=sheet('지도 지역','교내·세계지도 이름과 설명',info+' F열 영어는 교내 지도에만 표시됩니다.',['ID(고정)','지도(고정)','이름','분류','설명','영어 이름(교내)'],rows,[3,4,5,6],[25,18,30,38,100,34])
+ region_sheet=sheet('지도 지역','교내·세계지도 이름과 설명',info+' F열 영어는 교내·세계지도에 표시됩니다.',['ID(고정)','지도(고정)','이름','분류','설명','영어 이름'],rows,[3,4,5,6],[25,18,30,38,100,34])
  region_sheet.delete_rows(1,3);region_sheet.freeze_panes='C2';region_sheet.auto_filter.ref=f'A1:F{region_sheet.max_row}'
  descriptions={'campusTitle':'교내 지도 접근성 설명','worldTitle':'세계지도 접근성 설명','academyLink':'세계지도 / 교내 전환 글씨','academyLinkAria':'세계지도 / 교내 전환 접근성','campusKicker':'교내 설명 패널 상단','worldKicker':'세계 설명 패널 상단','detailsSuffix':'지역 선택 접근성 접미사','campusLegend':'교내 범례','worldLegend':'세계 범례','campusNote':'교내 하단 안내','worldNote':'세계 하단 안내','campusAria':'교내 지도 이름','worldAria':'세계지도 이름'}
  sheet('지도 공통 문구','지도 공통 안내 · 범례 · 접근성',info,['ID(고정)','적용 위치','현재 문구(수정)','비고'],[[k,descriptions.get(k,k),v,'지도 이름은 지도 지역에서 수정'] for k,v in map_copy.items()],[3],[28,35,100,40])
@@ -84,7 +84,7 @@ def export(output):
  usage.append(['시트','편집 내용','편집 칸'])
  for sh in w:
   if sh.title=='사용 방법' or sh.sheet_state=='hidden':continue
-  usage.append([sh.title,'지역 이름·설명·교내 영어 이름' if sh.title=='지도 지역' else sh['A1'].value,'노란색 셀'])
+  usage.append([sh.title,'지역 이름·설명·영어 이름' if sh.title=='지도 지역' else sh['A1'].value,'노란색 셀'])
  for msg in ['노란색 셀만 수정하고 파란색 ID·적용 위치·행 순서를 유지해 주세요.','인물·보스의 숨김 정보와 전투 능력도 포함되어 있습니다. 일반 소개에 잘못 옮기지 않도록 주의하세요.','이름·설명은 지도 지역, 영어는 같은 시트 F열, 지도 안내는 지도 공통 문구에서 수정합니다.','빈칸은 미기재입니다. 의도하지 않은 항목을 지우지 마세요.','수정본을 채팅에 올리면 사이트에 반영할 수 있습니다. 엑셀 저장만으로 자동 배포되지는 않습니다.','이미지·지도 지형·위치·글씨 크기·클릭 범위는 이 파일에서 수정하지 않습니다.','현재 화면에 없는 예전 대륙·국가 카드는 숨긴 호환 시트에 보관했습니다. 지도 설명은 지도 지역 시트를 사용하세요.','매크로 없는 XLSX 파일이며 매크로 실행이 필요하지 않습니다.']:
   usage.append([msg])
  for col,width in [('A',65),('B',70),('C',25)]:usage.column_dimensions[col].width=width

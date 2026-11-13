@@ -272,7 +272,7 @@ def sync_map_regions(wb,path):
         for item in items:
             row=entries[mode+'.'+item['id']]
             item.update(name=text(row[2]),category=text(row[3]),desc=text(row[4]))
-            if mode=='campus' and len(row)>5 and row[5] is not None:item['englishName']=text(row[5])
+            if len(row)>5 and row[5] is not None:item['englishName']=text(row[5])
     payload='const campus='+quote(data['campus'])+';\nconst world='+quote(data['world'])+';\n'
     result=source[:start]+payload+source[end:]
     if '지도 공통 문구' in wb:
