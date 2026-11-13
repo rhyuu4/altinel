@@ -11,6 +11,15 @@
     'assets/audio/powdered-waltz.mp3',
     'assets/audio/invitation-to-the-castle-ball.mp3'
   ];
+  const panel = document.querySelector('.music-panel');
+  const panelToggle = document.getElementById('music-panel-toggle');
+  const panelContent = document.getElementById('music-panel-content');
+  panelToggle.addEventListener('click', () => {
+    const collapsed = panel.classList.toggle('is-collapsed');
+    panelContent.hidden = collapsed;
+    panelToggle.setAttribute('aria-expanded', String(!collapsed));
+    panelToggle.textContent = collapsed ? '펼치기' : '접기';
+  });
   let index = 0;
   audio.volume = Number(volume.value) / 100;
   const update = () => {
